@@ -1,4 +1,5 @@
 import os
+from django.conf import settings
 from datetime import datetime, timedelta
 
 import requests
@@ -9,7 +10,7 @@ DAYS_OF_WEEK = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDA
 
 
 def send_telegram_message(message, chat_id):
-    token = os.getenv('TELEGRAM_BOT_TOKEN')
+    token = settings.TG_BOT_TOKEN
     data = {
         'chat_id': chat_id,
         'text': message
