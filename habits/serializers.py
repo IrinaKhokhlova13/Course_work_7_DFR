@@ -48,5 +48,3 @@ class HabitSerializer(serializers.ModelSerializer):
             'duration',
             'is_public',
         )
-
-
