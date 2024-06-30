@@ -13,6 +13,15 @@ class HabitListApiView(generics.ListAPIView):
     permission_classes = [IsAuthenticated, IsOwner | IsAdminUser]
     pagination_class = HabitPagination
 
+class OwnerHabitListAPIView(generics.ListAPIView):
+    """Просмотр всех привычек пользователя, но не более 5 на странице."""
+    serializer_class = HabitSerializer
+    pagination_class = HabitPagination
+    permission_classes = [IsAuthenticated, IsOwner]
+
+    def get_queryset(self):
+        return Habit.objects.filter(owner=self.request.user)
+
 
 class HabitCreateApiView(generics.CreateAPIView):
     queryset = Habit.objects.all()
