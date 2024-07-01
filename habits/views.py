@@ -8,16 +8,9 @@ from habits.serializers import HabitSerializer
 
 
 class HabitListApiView(generics.ListAPIView):
-    queryset = Habit.objects.all()
     serializer_class = HabitSerializer
-    permission_classes = [IsAuthenticated, IsOwner | IsAdminUser]
+    permission_classes = [IsAuthenticated]
     pagination_class = HabitPagination
-
-class OwnerHabitListAPIView(generics.ListAPIView):
-    """Просмотр всех привычек пользователя, но не более 5 на странице."""
-    serializer_class = HabitSerializer
-    pagination_class = HabitPagination
-    permission_classes = [IsAuthenticated, IsOwner]
 
     def get_queryset(self):
         return Habit.objects.filter(owner=self.request.user)
