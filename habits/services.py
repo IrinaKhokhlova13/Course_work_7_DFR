@@ -1,4 +1,3 @@
-import os
 from django.conf import settings
 from datetime import datetime, timedelta
 
