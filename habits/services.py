@@ -10,6 +10,9 @@ DAYS_OF_WEEK = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDA
 
 
 def send_telegram_message(message, chat_id):
+    """
+        Отправка сообщения в телеграм
+    """
     token = settings.TG_BOT_TOKEN
     data = {
         'chat_id': chat_id,
@@ -18,10 +21,16 @@ def send_telegram_message(message, chat_id):
 
     url = f'https://api.telegram.org/bot{token}/sendMessage'
     response = requests.post(url, data=data)
-    return response
+    if response.status_code == 200:
+        return response
+    else:
+        return False
 
 
 def habit_scheduler():
+    """
+    Функция создания сообщения
+    """
     try:
         current_time = datetime.now().replace(second=0, microsecond=0)
         current_time_plus_5 = current_time + timedelta(minutes=5)

@@ -49,7 +49,7 @@ class HabitTestCase(APITestCase):
         self.assertTrue(Habit.objects.all().exists())
 
     def test_get_share_habits(self):
-        """ Тест получения информации о общедоступных привычках """
+        """ Тест получения информации об общедоступных привычках """
         user = User(
             email="test2@gmail.com",
             password="test",
